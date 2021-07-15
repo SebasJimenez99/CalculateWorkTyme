@@ -5,6 +5,7 @@
  */
 package com.ias.project.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -35,9 +36,7 @@ public class Report implements Serializable {
     private Integer id;
     private String idService;
     private String idTechnician;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date initialDate;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date finalDate;
+    private String initialDate;
+    private String finalDate;
 
 }

@@ -34,8 +34,8 @@ public class ReportUnitTest {
 
     @Test
     public void testCreateReport() {
-        Date initialDate = new Date();
-        Date finalDate = new Date(); 
+        String initialDate = "Wed Jul 14 22:20:42 COT 2021";
+        String finalDate = "Wed Jul 14 20:20:42 COT 2021"; 
         Report newReport = new Report(1, "abcsd1", "dsag", initialDate,
                 finalDate);
         when(reportRepository.save(newReport)).thenReturn(newReport);

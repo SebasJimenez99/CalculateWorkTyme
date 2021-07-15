@@ -8,6 +8,7 @@ package com.ias.project.backend.service.implement;
 import com.ias.project.backend.model.Report;
 import com.ias.project.backend.repository.ReportRepository;
 import com.ias.project.backend.service.ReportService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
  * @author Sebastian
  */
 @Service
+@Slf4j
 public class ReportServiceImp implements ReportService {
 
     @Autowired
@@ -29,6 +31,10 @@ public class ReportServiceImp implements ReportService {
                 && report.getFinalDate() != null) {
             newReport = reportRepository.save(report);
         }
+        log.info("Entry into service function to know the create initial = " +
+                    newReport.getInitialDate());
+        log.info("Entry into service function to know the create final = " +
+                    newReport.getFinalDate());
         return newReport;
     }
 }
