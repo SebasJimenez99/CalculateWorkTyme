@@ -5,6 +5,8 @@
  */
 package com.ias.project.backend.service.implement;
 
+import com.ias.project.backend.dto.DateAndType;
+import com.ias.project.backend.dto.TypeHour;
 import com.ias.project.backend.model.Report;
 import com.ias.project.backend.repository.ReportRepository;
 import com.ias.project.backend.service.CalculateTimeService;
@@ -67,10 +69,10 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
                 Logger.getLogger(CalculateTimeServiceImp.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
-            List<Date> listDates = workingHours(initialDate, finalDate);
-            if (!listDates.isEmpty()) {
-                Long initialTime = listDates.get(0).getTime();
-                Long finalTime = listDates.get(1).getTime();
+            DateAndType dateAndType = workingHours(initialDate, finalDate);
+            if (dateAndType != null) {
+                Long initialTime = dateAndType.getInitialDate().getTime();
+                Long finalTime = dateAndType.getFinalDate().getTime();
                 Long mili = finalTime - initialTime;
                 Long min = mili / (1000 * 60);
                 Float hour = min / 60f;
@@ -81,6 +83,10 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
             }
         });
         return totalHoursOfOperation;
+    }
+
+    private void hourByType(String type, Float hour) {
+        TypeHour typeHour = new TypeHour();
     }
 
     private List<Report> getTechnicianByWeekNumber(
@@ -122,8 +128,8 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
         return reportsByTechnician;
     }
 
-    private List<Date> workingHours(Date initialDate, Date finalDate) {
-        List<Date> listDates = new ArrayList<>();
+    private DateAndType workingHours(Date initialDate, Date finalDate) {
+        DateAndType dateAndType = new DateAndType();
         Calendar calendarInitial = Calendar.getInstance();
         calendarInitial.setTime(initialDate);
         Calendar calendarFinal = Calendar.getInstance();
@@ -135,9 +141,10 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
         if (dayWeekInitial >= 1 && dayWeekInitial <= 6 && initialHour >= 7
                 && initialHour <= 20 && dayWeekFinal >= 1
                 && dayWeekFinal <= 6 && finalHour >= 7 && finalHour <= 20) {
-            listDates.add(initialDate);
-            listDates.add(finalDate);
+            dateAndType.setInitialDate(initialDate);
+            dateAndType.setFinalDate(finalDate);
+            dateAndType.setType("Horas Normales");
         }
-        return listDates;
+        return dateAndType;
     }
 }
