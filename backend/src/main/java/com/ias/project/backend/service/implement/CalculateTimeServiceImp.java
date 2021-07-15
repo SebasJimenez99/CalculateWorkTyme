@@ -35,18 +35,16 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
     private ReportRepository reportRepository;
 
     @Override
-    public Long hoursOfOperation(String idTechnician, Integer weekNumber) {
+    public Float hoursOfOperation(String idTechnician, Integer weekNumber) {
         List<Report> listReports = reportRepository.findAll();
-        log.info("Entry into service function to know listReport Initial= "
-                + listReports.get(0).getInitialDate());
         List<Report> reportsByTechnician = getTechnicianById(listReports,
                 idTechnician);
         List<Report> reportsByTechnicianAndWeekNumber
                 = getTechnicianByWeekNumber(reportsByTechnician, weekNumber);
-        List<Long> hoursOfOperation
+        List<Float> hoursOfOperation
                 = getTotalHoursOfOperation(reportsByTechnicianAndWeekNumber);
-        Long totalHoursOfOperation = 0L;
-        totalHoursOfOperation = hoursOfOperation.stream().map((hours) -> hours)
+        Float totalHoursOfOperation = 0f;
+        totalHoursOfOperation = hoursOfOperation.stream().map((hour) -> hour)
                 .reduce(totalHoursOfOperation, (accumulator, _item)
                         -> accumulator + _item);
         log.info("Entry into service function to know the total hours = "
@@ -54,9 +52,9 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
         return totalHoursOfOperation;
     }
 
-    private List<Long> getTotalHoursOfOperation(
+    private List<Float> getTotalHoursOfOperation(
             List<Report> reportsByTechnicianAndWeekNumber) {
-        List<Long> totalHoursOfOperation = new ArrayList<>();
+        List<Float> totalHoursOfOperation = new ArrayList<>();
         reportsByTechnicianAndWeekNumber.forEach((report) -> {
             DateFormat dateFormat = new SimpleDateFormat(
                     "EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
@@ -69,14 +67,18 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
                 Logger.getLogger(CalculateTimeServiceImp.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
-            Long initialTime = initialDate.getTime();
-            Long finalTime = finalDate.getTime();
-            Long mili = finalTime - initialTime;
-            Long min = mili / (1000 * 60);
-            Long hour = min / 60;
-            log.info("Entry into service function to know the mins = "
-                + min);
-            totalHoursOfOperation.add(hour);
+            List<Date> listDates = workingHours(initialDate, finalDate);
+            if (!listDates.isEmpty()) {
+                Long initialTime = listDates.get(0).getTime();
+                Long finalTime = listDates.get(1).getTime();
+                Long mili = finalTime - initialTime;
+                Long min = mili / (1000 * 60);
+                Float hour = min / 60f;
+                hour = Math.round(hour * 100) / 100f;
+                log.info("Entry into service function to know the mins = "
+                        + hour);
+                totalHoursOfOperation.add(hour);
+            }
         });
         return totalHoursOfOperation;
     }
@@ -96,6 +98,8 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
                         .log(Level.SEVERE, null, ex);
             }
             Calendar calendar = Calendar.getInstance();
+            calendar.setFirstDayOfWeek(Calendar.MONDAY);
+            calendar.setMinimalDaysInFirstWeek(4);
             calendar.setTime(initialDate);
             numberWeekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
             if (Objects.equals(weekNumber, numberWeekOfYear)) {
@@ -116,5 +120,24 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
                     reportsByTechnician.add(report);
                 });
         return reportsByTechnician;
+    }
+
+    private List<Date> workingHours(Date initialDate, Date finalDate) {
+        List<Date> listDates = new ArrayList<>();
+        Calendar calendarInitial = Calendar.getInstance();
+        calendarInitial.setTime(initialDate);
+        Calendar calendarFinal = Calendar.getInstance();
+        calendarFinal.setTime(finalDate);
+        Integer initialHour = calendarInitial.get(Calendar.HOUR_OF_DAY);
+        Integer finalHour = calendarFinal.get(Calendar.HOUR_OF_DAY);
+        Integer dayWeekInitial = calendarInitial.get(Calendar.DAY_OF_WEEK);
+        Integer dayWeekFinal = calendarFinal.get(Calendar.DAY_OF_WEEK);
+        if (dayWeekInitial >= 1 && dayWeekInitial <= 6 && initialHour >= 7
+                && initialHour <= 20 && dayWeekFinal >= 1
+                && dayWeekFinal <= 6 && finalHour >= 7 && finalHour <= 20) {
+            listDates.add(initialDate);
+            listDates.add(finalDate);
+        }
+        return listDates;
     }
 }

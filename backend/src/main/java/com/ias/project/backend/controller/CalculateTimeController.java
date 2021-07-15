@@ -27,10 +27,10 @@ public class CalculateTimeController {
     private CalculateTimeService calculateTimeService;
 
     @GetMapping
-    public ResponseEntity<Long> createReport(
+    public ResponseEntity<Float> createReport(
             @RequestParam final String idTechnical,
             @RequestParam final Integer weekNumber) {
-        Long response = calculateTimeService
+        Float response = calculateTimeService
                 .hoursOfOperation(idTechnical, weekNumber);
         if (response == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

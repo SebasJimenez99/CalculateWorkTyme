@@ -11,5 +11,5 @@ package com.ias.project.backend.service;
  */
 public interface CalculateTimeService {
 
-    Long hoursOfOperation(String idTechnician, Integer weekNumber);
+    Float hoursOfOperation(String idTechnician, Integer weekNumber);
 }

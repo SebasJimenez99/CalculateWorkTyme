@@ -54,7 +54,7 @@ public class CalculateTimeIntegrationTest {
         DateFormat simpleFormat =
                 new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   
         Date initialDateFirst = simpleFormat.parse("2021-07-13 17:00:00");
-        Date finalDateFirst = simpleFormat.parse("2021-07-13 20:30:00");
+        Date finalDateFirst = simpleFormat.parse("2021-07-13 21:30:00");
         Date initialDateSecond = simpleFormat
                 .parse("2021-07-14 08:10:00");
         Date finalDateSecond = simpleFormat.parse("2021-07-14 12:20:00");       
@@ -71,7 +71,7 @@ public class CalculateTimeIntegrationTest {
                         finalDateSecond.toString()))))
                 .andReturn();
         this.mockMvc.perform(MockMvcRequestBuilders
-                .get("/calculate?idTechnical=adf31&weekNumber=29"))
+                .get("/calculate?idTechnical=adf31&weekNumber=28"))
                 .andDo(print()).andExpect(status().isOk())
                 .andReturn();
     }
