@@ -5,11 +5,13 @@
  */
 package com.ias.project.backend.service;
 
+import com.ias.project.backend.dto.TypeHour;
+
 /**
  *
  * @author Sebastian
  */
 public interface CalculateTimeService {
 
-    Float hoursOfOperation(String idTechnician, Integer weekNumber);
+    TypeHour hoursOfOperation(String idTechnician, Integer weekNumber);
 }

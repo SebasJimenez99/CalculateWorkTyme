@@ -5,6 +5,7 @@
  */
 package com.ias.project.backend.controller;
 
+import com.ias.project.backend.dto.TypeHour;
 import com.ias.project.backend.model.Report;
 import com.ias.project.backend.service.CalculateTimeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,10 @@ public class CalculateTimeController {
     private CalculateTimeService calculateTimeService;
 
     @GetMapping
-    public ResponseEntity<Float> createReport(
+    public ResponseEntity<TypeHour> createReport(
             @RequestParam final String idTechnical,
             @RequestParam final Integer weekNumber) {
-        Float response = calculateTimeService
+        TypeHour response = calculateTimeService
                 .hoursOfOperation(idTechnical, weekNumber);
         if (response == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

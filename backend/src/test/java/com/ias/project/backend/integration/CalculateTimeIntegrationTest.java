@@ -53,8 +53,8 @@ public class CalculateTimeIntegrationTest {
         ObjectMapper objectMapper = new ObjectMapper();
         DateFormat simpleFormat =
                 new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   
-        Date initialDateFirst = simpleFormat.parse("2021-07-13 17:00:00");
-        Date finalDateFirst = simpleFormat.parse("2021-07-13 21:30:00");
+        Date initialDateFirst = simpleFormat.parse("2021-07-13 21:00:00");
+        Date finalDateFirst = simpleFormat.parse("2021-07-14 05:30:00");
         Date initialDateSecond = simpleFormat
                 .parse("2021-07-14 08:10:00");
         Date finalDateSecond = simpleFormat.parse("2021-07-14 12:20:00");       
