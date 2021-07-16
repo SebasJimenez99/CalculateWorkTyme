@@ -53,11 +53,20 @@ public class CalculateTimeIntegrationTest {
         ObjectMapper objectMapper = new ObjectMapper();
         DateFormat simpleFormat =
                 new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");   
-        Date initialDateFirst = simpleFormat.parse("2021-07-13 21:00:00");
-        Date finalDateFirst = simpleFormat.parse("2021-07-14 05:30:00");
+        Date initialDateFirst = simpleFormat.parse("2021-07-13 14:00:00");
+        Date finalDateFirst = simpleFormat.parse("2021-07-14 15:30:00");
         Date initialDateSecond = simpleFormat
                 .parse("2021-07-14 08:10:00");
-        Date finalDateSecond = simpleFormat.parse("2021-07-14 12:20:00");       
+        Date finalDateSecond = simpleFormat.parse("2021-07-14 12:20:00");
+        Date initialDateThird = simpleFormat
+                .parse("2021-07-18 08:10:00");
+        Date finalDateThird = simpleFormat.parse("2021-07-18 21:20:00");
+        Date initialDateFourth = simpleFormat
+                .parse("2021-07-15 08:10:00");
+        Date finalDateFourth = simpleFormat.parse("2021-07-15 14:20:00");
+        Date initialDateFifth = simpleFormat
+                .parse("2021-07-16 08:10:00");
+        Date finalDateFifth = simpleFormat.parse("2021-07-16 14:20:00");
         this.mockMvc.perform(MockMvcRequestBuilders.post("/reports")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(new Report(1,
@@ -69,6 +78,18 @@ public class CalculateTimeIntegrationTest {
                 .content(objectMapper.writeValueAsString(new Report(2,
                         "aasd5", "adf31", initialDateSecond.toString(),
                         finalDateSecond.toString()))))
+                .andReturn();
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/reports")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new Report(3,
+                        "aasd25", "adf31", initialDateThird.toString(),
+                        finalDateThird.toString()))))
+                .andReturn();
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/reports")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new Report(4,
+                        "ahvn75", "adf31", initialDateFourth.toString(),
+                        finalDateFourth.toString()))))
                 .andReturn();
         this.mockMvc.perform(MockMvcRequestBuilders
                 .get("/calculate?idTechnical=adf31&weekNumber=28"))

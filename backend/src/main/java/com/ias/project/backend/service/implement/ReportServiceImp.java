@@ -25,7 +25,6 @@ public class ReportServiceImp implements ReportService {
 
     @Override
     public Report createReport(Report report) {
-        log.info("Entry into service function to create a new report");
         Report newReport = new Report();
         if (report.getIdService() != null && report.getIdTechnician() != null
                 && report.getInitialDate() != null 
