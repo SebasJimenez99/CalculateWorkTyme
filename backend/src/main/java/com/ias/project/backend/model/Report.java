@@ -5,6 +5,8 @@
  */
 package com.ias.project.backend.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,14 +28,20 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name="report_service")
+@ApiModel(description = "Model class that stores the report information")
 public class Report implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes = "Id associated with the report")
     private Integer id;
+    @ApiModelProperty(notes = "Service id associated with the report")
     private String idService;
+    @ApiModelProperty(notes = "Technician id associated with the report")
     private String idTechnician;
+    @ApiModelProperty(notes = "Initial date associated with the report")
     private String initialDate;
+    @ApiModelProperty(notes = "Final date associated with the report")
     private String finalDate;
 
 }

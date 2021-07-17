@@ -5,6 +5,8 @@
  */
 package com.ias.project.backend.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,10 +21,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ApiModel(description = "DTO class that stores the date and type information")
 public class DateAndType {
 
+    @ApiModelProperty(notes = "Initial date associated with the date")
     private Date initialDate;
+    @ApiModelProperty(notes = "Final date associated with the date")
     private Date finalDate;
+    @ApiModelProperty(notes = "Type associated with the type report")
     private String type;
 
 }

@@ -44,6 +44,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
 
     @Override
     public TypeHour hoursOfOperation(String idTechnician, Integer weekNumber) {
+        log.info("Entry into service function to calculate the number hours");
         List<Report> listReports = reportRepository.findAll();
         List<Report> reportsByTechnician = getTechnicianById(listReports,
                 idTechnician);
@@ -57,6 +58,8 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
 
     private List<TypeHour> getTotalHoursOfOperation(
             List<Report> reportsByTechnicianAndWeekNumber) {
+        log.info("Entry into service function to get the total hours of "
+                + "operation");
         List<Report> listHoursOfWeek = new ArrayList<>();
         List<TypeHour> listHoursByType = new ArrayList<>();
         reportsByTechnicianAndWeekNumber.forEach((report) -> {
@@ -91,6 +94,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
     }
 
     private TypeHour getAllTypeHour(List<TypeHour> listTotalHoursOfOperation) {
+        log.info("Entry into service function to get all the types hours");
         TypeHour typeHour = new TypeHour();
         RegularHour regularHour = new RegularHour();
         NightHour nightHour = new NightHour();
@@ -149,6 +153,8 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
 
     private Float getTotalHoursOfWeek(
             List<Report> reportsByTechnicianAndWeekNumber) {
+        log.info("Entry into service function to get the total hours of the "
+                + "week");
         List<Float> listHoursOfOperation = new ArrayList<>();
         Float totalHoursOfOperation = 0f;
         reportsByTechnicianAndWeekNumber.forEach((report) -> {
@@ -175,12 +181,11 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
                 .map((hour) -> hour)
                 .reduce(totalHoursOfOperation, (accumulator, _item)
                         -> accumulator + _item);
-        /*log.info("Entry into service function to know the total hours week = "
-                + totalHoursOfOperation);*/
         return totalHoursOfOperation;
     }
 
     private List<Float> sumAllHours(List<Float> listHoursOfType) {
+        log.info("Entry into service function to sum all hours receive");
         List<Float> hoursAdded = new ArrayList<>();
         Float totalHoursOfOperation = 0f;
         totalHoursOfOperation = listHoursOfType.stream()
@@ -192,6 +197,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
     }
 
     private TypeHour hourByType(String type, Float hour) {
+        log.info("Entry into service function to separate the hours by type");
         List<Float> listOfHour = new ArrayList<>();
         TypeHour typeHour = new TypeHour();
         RegularHour regularHour = new RegularHour();
@@ -284,6 +290,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
 
     private List<DateAndType> workingHours(Date initialDate, Date finalDate,
             Float totalHoursOfOperation) {
+        log.info("Entry into service function to get working hours");
         List<DateAndType> listDateAndType = new ArrayList<>();
         Calendar calendarInitial = Calendar.getInstance();
         calendarInitial.setTime(initialDate);
@@ -334,6 +341,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
     private List<DateAndType> regularHours(Integer initialHour,
             Integer finalHour, Integer dayWeekInitial, Integer dayWeekFinal,
             Date initialDate, Date finalDate, Float totalHoursOfOperation) {
+        log.info("Entry into service function to get regular hours");
         DateAndType dateAndType = new DateAndType();
         List<DateAndType> listDateAndType = new ArrayList<>();
         if (dayWeekInitial != 1 && initialHour >= 7 && initialHour <= 20
@@ -351,6 +359,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
     private List<DateAndType> multipleHours(Integer initialHour,
             Integer finalHour, Integer dayWeekInitial, Integer dayWeekFinal,
             Date initialDate, Date finalDate, Float totalHoursOfOperation) {
+        log.info("Entry into service function to get multiple types hours");
         DateAndType dateAndType = new DateAndType();
         DateAndType dateAndTypeTwo = new DateAndType();
         DateAndType dateAndTypeThree = new DateAndType();
@@ -406,6 +415,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
     private List<DateAndType> dominicalHours(Integer dayWeekInitial,
             Integer dayWeekFinal, Date initialDate, Date finalDate,
             Float totalHoursOfOperation) {
+        log.info("Entry into service function to get dominical hours");
         DateAndType dateAndType = new DateAndType();
         List<DateAndType> listDateAndType = new ArrayList<>();
         if (dayWeekInitial == 1 && dayWeekFinal == 1
@@ -421,6 +431,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
     private List<DateAndType> extraRegularHours(Integer initialHour,
             Integer finalHour, Integer dayWeekInitial, Integer dayWeekFinal,
             Date initialDate, Date finalDate, Float totalHoursOfOperation) {
+        log.info("Entry into service function to get extra regular hours");
         DateAndType dateAndTypeExtra = new DateAndType();
         List<DateAndType> listDateAndType = new ArrayList<>();
         if (dayWeekInitial != 1 && initialHour >= 7 && initialHour <= 20
@@ -438,6 +449,8 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
     private List<DateAndType> extraMultipleHours(Integer initialHour,
             Integer finalHour, Integer dayWeekInitial, Integer dayWeekFinal,
             Date initialDate, Date finalDate, Float totalHoursOfOperation) {
+        log.info("Entry into service function to get extra multiple types"
+                + " hours");
         DateAndType dateAndType = new DateAndType();
         DateAndType dateAndTypeTwo = new DateAndType();
         DateAndType dateAndTypeThree = new DateAndType();
@@ -493,6 +506,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
     private List<DateAndType> extraDominicalHours(Integer dayWeekInitial,
             Integer dayWeekFinal, Date initialDate, Date finalDate,
             Float totalHoursOfOperation) {
+        log.info("Entry into service function to get extra dominical hours");
         DateAndType dateAndType = new DateAndType();
         List<DateAndType> listDateAndType = new ArrayList<>();
         if (dayWeekInitial == 1 && dayWeekFinal == 1

@@ -5,6 +5,8 @@
  */
 package com.ias.project.backend.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,9 +21,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@ApiModel(description = "DTO class that stores the schedule information")
 public class SundayHour {
 
+    @ApiModelProperty(notes = "Type hour associated with the schedule")
     private String type;
+    @ApiModelProperty(notes = "List of hours associated with the schedule")
     private List<Float> listOfHour;
 
 }
