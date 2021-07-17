@@ -57,10 +57,12 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
 
     private List<TypeHour> getTotalHoursOfOperation(
             List<Report> reportsByTechnicianAndWeekNumber) {
-        Float totalHoursOfOperation
-                = getTotalHoursOfWeek(reportsByTechnicianAndWeekNumber);
+        List<Report> listHoursOfWeek = new ArrayList<>();
         List<TypeHour> listHoursByType = new ArrayList<>();
         reportsByTechnicianAndWeekNumber.forEach((report) -> {
+            listHoursOfWeek.add(report);
+            Float totalHoursOfOperation
+                    = getTotalHoursOfWeek(listHoursOfWeek);
             DateFormat dateFormat = new SimpleDateFormat(
                     "EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
             Date initialDate = new Date();
@@ -173,8 +175,8 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
                 .map((hour) -> hour)
                 .reduce(totalHoursOfOperation, (accumulator, _item)
                         -> accumulator + _item);
-        log.info("Entry into service function to know the total hours week = "
-                + totalHoursOfOperation);
+        /*log.info("Entry into service function to know the total hours week = "
+                + totalHoursOfOperation);*/
         return totalHoursOfOperation;
     }
 
@@ -282,10 +284,6 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
 
     private List<DateAndType> workingHours(Date initialDate, Date finalDate,
             Float totalHoursOfOperation) {
-        DateAndType dateAndType = new DateAndType();
-        DateAndType dateAndTypeTwo = new DateAndType();
-        DateAndType dateAndTypeThree = new DateAndType();
-        DateAndType dateAndTypeExtra = new DateAndType();
         List<DateAndType> listDateAndType = new ArrayList<>();
         Calendar calendarInitial = Calendar.getInstance();
         calendarInitial.setTime(initialDate);
@@ -295,6 +293,49 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
         Integer finalHour = calendarFinal.get(Calendar.HOUR_OF_DAY);
         Integer dayWeekInitial = calendarInitial.get(Calendar.DAY_OF_WEEK);
         Integer dayWeekFinal = calendarFinal.get(Calendar.DAY_OF_WEEK);
+        List<DateAndType> listRegularDateAndType
+                = regularHours(initialHour, finalHour, dayWeekInitial,
+                        dayWeekFinal, initialDate, finalDate,
+                        totalHoursOfOperation);
+        List<DateAndType> listMultipleDateAndType
+                = multipleHours(initialHour, finalHour, dayWeekInitial,
+                        dayWeekFinal, initialDate, finalDate,
+                        totalHoursOfOperation);
+        List<DateAndType> listDominicalDateAndType
+                = dominicalHours(dayWeekInitial,dayWeekFinal, initialDate,
+                        finalDate, totalHoursOfOperation);
+        List<DateAndType> listExtraRegularDateAndType
+                = extraRegularHours(initialHour, finalHour, dayWeekInitial,
+                        dayWeekFinal, initialDate, finalDate,
+                        totalHoursOfOperation);
+        List<DateAndType> listExtraMultipleDateAndType
+                = extraMultipleHours(initialHour, finalHour, dayWeekInitial,
+                        dayWeekFinal, initialDate, finalDate,
+                        totalHoursOfOperation);
+        List<DateAndType> listExtraDominicalDateAndType
+                = extraDominicalHours(dayWeekInitial, dayWeekFinal, initialDate,
+                        finalDate, totalHoursOfOperation);
+        if (!listRegularDateAndType.isEmpty()) {
+            listDateAndType = listRegularDateAndType;
+        } else if (!listMultipleDateAndType.isEmpty()) {
+            listDateAndType = listMultipleDateAndType;
+        } else if (!listDominicalDateAndType.isEmpty()) {
+            listDateAndType = listDominicalDateAndType;
+        } else if (!listExtraRegularDateAndType.isEmpty()) {
+            listDateAndType = listExtraRegularDateAndType;
+        } else if (!listExtraMultipleDateAndType.isEmpty()) {
+            listDateAndType = listExtraMultipleDateAndType;
+        } else if (!listExtraDominicalDateAndType.isEmpty()) {
+            listDateAndType = listExtraDominicalDateAndType;
+        }
+        return listDateAndType;
+    }
+
+    private List<DateAndType> regularHours(Integer initialHour,
+            Integer finalHour, Integer dayWeekInitial, Integer dayWeekFinal,
+            Date initialDate, Date finalDate, Float totalHoursOfOperation) {
+        DateAndType dateAndType = new DateAndType();
+        List<DateAndType> listDateAndType = new ArrayList<>();
         if (dayWeekInitial != 1 && initialHour >= 7 && initialHour <= 20
                 && dayWeekFinal != 1 && finalHour >= 7 && finalHour <= 20
                 && totalHoursOfOperation <= 48f
@@ -303,19 +344,29 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
             dateAndType.setFinalDate(finalDate);
             dateAndType.setType("Horas Normales");
             listDateAndType.add(dateAndType);
-        } else if (dayWeekInitial < dayWeekFinal && dayWeekInitial != 1) {
+        }
+        return listDateAndType;
+    }
+
+    private List<DateAndType> multipleHours(Integer initialHour,
+            Integer finalHour, Integer dayWeekInitial, Integer dayWeekFinal,
+            Date initialDate, Date finalDate, Float totalHoursOfOperation) {
+        DateAndType dateAndType = new DateAndType();
+        DateAndType dateAndTypeTwo = new DateAndType();
+        DateAndType dateAndTypeThree = new DateAndType();
+        List<DateAndType> listDateAndType = new ArrayList<>();
+        if (dayWeekInitial < dayWeekFinal && dayWeekInitial != 1
+                && totalHoursOfOperation <= 48) {
             Integer diferencia = dayWeekFinal - dayWeekInitial;
             finalHour += 24 * diferencia;
             if (initialHour > 20 && dayWeekFinal != 1
-                    && finalHour > 20 && finalHour < 31
-                    && totalHoursOfOperation <= 48) {
+                    && finalHour > 20 && finalHour < 31) {
                 dateAndType.setInitialDate(initialDate);
                 dateAndType.setFinalDate(finalDate);
                 dateAndType.setType("Horas Nocturnas");
                 listDateAndType.add(dateAndType);
             } else if (initialHour < 20 && dayWeekFinal != 1
-                    && finalHour > 20 && finalHour <= 31
-                    && totalHoursOfOperation <= 48) {
+                    && finalHour > 20 && finalHour <= 31) {
                 dateAndType.setInitialDate(initialDate);
                 Date dateTransform = new Date();
                 dateTransform.setTime(initialDate.getTime());
@@ -328,7 +379,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
                 dateAndTypeTwo.setType("Horas Nocturnas");
                 listDateAndType.add(dateAndTypeTwo);
             } else if (initialHour < 20 && dayWeekFinal != 1
-                    && finalHour > 31 && totalHoursOfOperation <= 48) {
+                    && finalHour > 31) {
                 dateAndType.setInitialDate(initialDate);
                 Date dateTransform = new Date();
                 dateTransform.setTime(initialDate.getTime());
@@ -348,13 +399,31 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
                 dateAndTypeThree.setType("Horas Normales");
                 listDateAndType.add(dateAndTypeThree);
             }
-        } else if (dayWeekInitial == 1 && dayWeekFinal == 1
+        }
+        return listDateAndType;
+    }
+
+    private List<DateAndType> dominicalHours(Integer dayWeekInitial,
+            Integer dayWeekFinal, Date initialDate, Date finalDate,
+            Float totalHoursOfOperation) {
+        DateAndType dateAndType = new DateAndType();
+        List<DateAndType> listDateAndType = new ArrayList<>();
+        if (dayWeekInitial == 1 && dayWeekFinal == 1
                 && totalHoursOfOperation <= 48) {
             dateAndType.setInitialDate(initialDate);
             dateAndType.setFinalDate(finalDate);
             dateAndType.setType("Horas Dominicales");
             listDateAndType.add(dateAndType);
-        } else if (dayWeekInitial != 1 && initialHour >= 7 && initialHour <= 20
+        }
+        return listDateAndType;
+    }
+
+    private List<DateAndType> extraRegularHours(Integer initialHour,
+            Integer finalHour, Integer dayWeekInitial, Integer dayWeekFinal,
+            Date initialDate, Date finalDate, Float totalHoursOfOperation) {
+        DateAndType dateAndTypeExtra = new DateAndType();
+        List<DateAndType> listDateAndType = new ArrayList<>();
+        if (dayWeekInitial != 1 && initialHour >= 7 && initialHour <= 20
                 && dayWeekFinal != 1 && finalHour >= 7 && finalHour <= 20
                 && totalHoursOfOperation > 48f
                 && Objects.equals(dayWeekInitial, dayWeekFinal)) {
@@ -362,6 +431,76 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
             dateAndTypeExtra.setFinalDate(finalDate);
             dateAndTypeExtra.setType("Horas Normales Extra");
             listDateAndType.add(dateAndTypeExtra);
+        }
+        return listDateAndType;
+    }
+
+    private List<DateAndType> extraMultipleHours(Integer initialHour,
+            Integer finalHour, Integer dayWeekInitial, Integer dayWeekFinal,
+            Date initialDate, Date finalDate, Float totalHoursOfOperation) {
+        DateAndType dateAndType = new DateAndType();
+        DateAndType dateAndTypeTwo = new DateAndType();
+        DateAndType dateAndTypeThree = new DateAndType();
+        List<DateAndType> listDateAndType = new ArrayList<>();
+        if (dayWeekInitial < dayWeekFinal && dayWeekInitial != 1
+                && totalHoursOfOperation > 48f) {
+            Integer diferencia = dayWeekFinal - dayWeekInitial;
+            finalHour += 24 * diferencia;
+            if (initialHour > 20 && dayWeekFinal != 1
+                    && finalHour > 20 && finalHour < 31) {
+                dateAndType.setInitialDate(initialDate);
+                dateAndType.setFinalDate(finalDate);
+                dateAndType.setType("Horas Nocturnas Extra");
+                listDateAndType.add(dateAndType);
+            } else if (initialHour < 20 && dayWeekFinal != 1
+                    && finalHour > 20 && finalHour <= 31) {
+                dateAndType.setInitialDate(initialDate);
+                Date dateTransform = new Date();
+                dateTransform.setTime(initialDate.getTime());
+                dateTransform.setHours(20);
+                dateAndType.setFinalDate(dateTransform);
+                dateAndType.setType("Horas Normales Extra");
+                listDateAndType.add(dateAndType);
+                dateAndTypeTwo.setInitialDate(dateTransform);
+                dateAndTypeTwo.setFinalDate(finalDate);
+                dateAndTypeTwo.setType("Horas Nocturnas Extra");
+                listDateAndType.add(dateAndTypeTwo);
+            } else if (initialHour < 20 && dayWeekFinal != 1
+                    && finalHour > 31) {
+                dateAndType.setInitialDate(initialDate);
+                Date dateTransform = new Date();
+                dateTransform.setTime(initialDate.getTime());
+                dateTransform.setHours(20);
+                dateAndType.setFinalDate(dateTransform);
+                dateAndType.setType("Horas Normales Extra");
+                listDateAndType.add(dateAndType);
+                Date dateTransformTwo = new Date();
+                dateTransformTwo.setTime(finalDate.getTime());
+                dateTransformTwo.setHours(7);
+                dateAndTypeTwo.setInitialDate(dateTransform);
+                dateAndTypeTwo.setFinalDate(dateTransformTwo);
+                dateAndTypeTwo.setType("Horas Nocturnas Extra");
+                listDateAndType.add(dateAndTypeTwo);
+                dateAndTypeThree.setInitialDate(dateTransformTwo);
+                dateAndTypeThree.setFinalDate(finalDate);
+                dateAndTypeThree.setType("Horas Normales Extra");
+                listDateAndType.add(dateAndTypeThree);
+            }
+        }
+        return listDateAndType;
+    }
+
+    private List<DateAndType> extraDominicalHours(Integer dayWeekInitial,
+            Integer dayWeekFinal, Date initialDate, Date finalDate,
+            Float totalHoursOfOperation) {
+        DateAndType dateAndType = new DateAndType();
+        List<DateAndType> listDateAndType = new ArrayList<>();
+        if (dayWeekInitial == 1 && dayWeekFinal == 1
+                && totalHoursOfOperation > 48) {
+            dateAndType.setInitialDate(initialDate);
+            dateAndType.setFinalDate(finalDate);
+            dateAndType.setType("Horas Dominicales Extra");
+            listDateAndType.add(dateAndType);
         }
         return listDateAndType;
     }

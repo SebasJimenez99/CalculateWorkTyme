@@ -91,6 +91,12 @@ public class CalculateTimeIntegrationTest {
                         "ahvn75", "adf31", initialDateFourth.toString(),
                         finalDateFourth.toString()))))
                 .andReturn();
+        this.mockMvc.perform(MockMvcRequestBuilders.post("/reports")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new Report(5,
+                        "acxha3", "adf31", initialDateFifth.toString(),
+                        finalDateFifth.toString()))))
+                .andReturn();
         this.mockMvc.perform(MockMvcRequestBuilders
                 .get("/calculate?idTechnical=adf31&weekNumber=28"))
                 .andDo(print()).andExpect(status().isOk())
