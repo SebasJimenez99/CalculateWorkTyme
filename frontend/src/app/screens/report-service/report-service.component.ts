@@ -35,38 +35,28 @@ export class ReportServiceComponent implements OnInit {
     });
   }
 
-  datesSpanish(): void {
-    this.es = {
-      firstDayOfWeek: 1,
-      dayNames: [ "domingo","lunes","martes","miércoles","jueves","viernes","sábado" ],
-      dayNamesShort: [ "dom","lun","mar","mié","jue","vie","sáb" ],
-      dayNamesMin: [ "D","L","M","X","J","V","S" ],
-      monthNames: [ "enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre" ],
-      monthNamesShort: [ "ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic" ],
-      today: 'Hoy',
-      clear: 'Borrar'
-    }
-  }
-
-  crearReport(): void {
+  createReport(): void {
     this.newReport = this.reportForm.value;
     let initialDate = new Date(this.reportForm.value.initialDate).getTime();
     let finalDate = new Date(this.reportForm.value.finalDate).getTime();
-    console.log(initialDate + " " + finalDate);
     if(initialDate > finalDate){
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'La fecha inicial es mayor que la fecha final',
-      })
+        text: 'La fecha u hora inicial son mayores que la fecha u hora final',
+      });
     } else {
       this.reportService.createReport(this.newReport).subscribe((success) => {
         Swal.fire({
           icon: 'success',
           title: 'El reporte ha sido creado',
-        })
+        });
       }, error => {
-        console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error,
+        });
       });
     }
   }

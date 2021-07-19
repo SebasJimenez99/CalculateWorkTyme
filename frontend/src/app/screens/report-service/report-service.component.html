@@ -1,9 +1,9 @@
 <mat-toolbar class="top-bar">
   <span>My Application</span>
 </mat-toolbar>
-<mat-card class="card-report">
+<mat-card class="card-report-calculate">
   <p class="title">Campos para reportar un servicio</p>
-  <form class="example-form" [formGroup]="reportForm">
+  <form class="card-form" [formGroup]="reportForm">
 
     <div class="row-input">
       <mat-form-field class="input-rep" appearance="fill">
@@ -18,17 +18,17 @@
     <div class="p-fluid p-grid p-formgrid flex">
       <div class="calendar-rep">
         <span class="p-float-label">
-          <p-calendar [showTime]="true" [locale]="es" inputId="time" formControlName="initialDate"></p-calendar>
+          <p-calendar [showTime]="true" inputId="time" formControlName="initialDate"></p-calendar>
           <label for="time">Fecha y hora inicial</label>
         </span>
       </div>
       <div class="calendar-rep">
         <span class="p-float-label">
-          <p-calendar [showTime]="true" [locale]="es" inputId="time" formControlName="finalDate"></p-calendar>
+          <p-calendar [showTime]="true" inputId="time" formControlName="finalDate"></p-calendar>
           <label for="time">Fecha y hora final</label>
         </span>
       </div>
     </div>
-    <button mat-raised-button color="primary" (click)="crearReport()" [disabled]="!reportForm.valid">Aceptar</button>
+    <button class="button-any" mat-raised-button (click)="createReport()" [disabled]="!reportForm.valid">Aceptar</button>
   </form>
 </mat-card>

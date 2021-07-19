@@ -1,29 +1,3 @@
-.top-bar {
-  height: 50px;
-  background-image: radial-gradient(circle at 94.74% 50%, #b898ff 0, #8b80ff 25%, #4669f9 50%, #0056f0 75%, #0047e8 100%);
-  color: white;
-}
-
-.card-report {
-  margin: 10%;
-  text-align: center;
-}
-
-.mat-raised-button {
-  margin-top: 3%;
-}
-
-.example-form {
-  min-width: 150px;
-  max-width: 100%;
-  width: 100%;
-}
-
-.input-rep {
-  margin-top: 4%;
-  width: 49%;
-}
-
 .calendar-rep {
   color: gray;
   text-align: left;
@@ -31,8 +5,20 @@
   margin-top: 4%;
 }
 
-.row-input .mat-form-field + .mat-form-field {
-  margin-left: 2%;
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.input-rep {
+  margin-top: 4%;
+  width: 49%;
+}
+
+.mat-raised-button {
+  margin-top: 3%;
 }
 
 ::ng-deep .p-inputtext {
@@ -48,12 +34,13 @@
   }
 }
 
-.flex {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.row-input .mat-form-field + .mat-form-field {
+  margin-left: 2%;
 }
+
+
+
+
 
 
 

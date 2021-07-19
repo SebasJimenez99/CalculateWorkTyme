@@ -1,4 +1,28 @@
+.button-any {
+  margin-top: 3%;
+  background-color: #182257;
+  color: white;
+}
+
 .title {
   font-size: x-large;
   font-weight: 700;
+}
+
+.top-bar {
+  height: 50px;
+  background-color: #313C74;
+  color: white;
+}
+
+.card-report-calculate {
+  margin: 10%;
+  text-align: center;
+}
+
+
+.card-form {
+  min-width: 150px;
+  max-width: 100%;
+  width: 100%;
 }
