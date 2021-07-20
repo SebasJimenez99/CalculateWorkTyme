@@ -67,7 +67,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
             Float totalHoursOfOperation
                     = getTotalHoursOfWeek(listHoursOfWeek);
             DateFormat dateFormat = new SimpleDateFormat(
-                    "EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+                    "yyyy-MM-dd HH:mm:ss", Locale.US);
             Date initialDate = new Date();
             Date finalDate = new Date();
             try {
@@ -159,7 +159,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
         Float totalHoursOfOperation = 0f;
         reportsByTechnicianAndWeekNumber.forEach((report) -> {
             DateFormat dateFormat = new SimpleDateFormat(
-                    "EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+                    "yyyy-MM-dd HH:mm:ss", Locale.US);
             Date initialDate = new Date();
             Date finalDate = new Date();
             try {
@@ -255,7 +255,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
         Integer numberWeekOfYear = 0;
         for (Report report : reportsByTechnician) {
             DateFormat dateFormat = new SimpleDateFormat(
-                    "EEE MMM dd HH:mm:ss zzz yyyy", Locale.US);
+                    "yyyy-MM-dd HH:mm:ss", Locale.US);
             Date initialDate = new Date();
             try {
                 initialDate = dateFormat.parse(report.getInitialDate());

@@ -39,15 +39,8 @@ export class CalculateServiceComponent implements OnInit {
   getReportByTechnicianIdAndWeekNumber(): void {
     this.calculateService.calculateTimeByTechnician(this.calculateForm.value.idTechnical,
       this.calculateForm.value.weekNumber).subscribe(success => {
-        if (success != undefined) {
-          this.openDialog(success);
-          console.log(success);
-        } else {
-          Swal.fire({
-            icon: 'info',
-            text: 'No se han encontrado registros'
-          });
-        }
+        this.openDialog(success);
+        console.log(success);
       }, error => {
         Swal.fire({
           icon: 'error',

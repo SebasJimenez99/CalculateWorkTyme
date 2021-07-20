@@ -1,27 +1,28 @@
-<h1 mat-dialog-title>Favorite Animal</h1>
+<h1 mat-dialog-title>Horas de trabajo</h1>
 <div mat-dialog-content>
     <li>
-      <span></span> {{data.regularHour.type}} :
-      <span></span> {{data.regularHour.listOfHour[0]}}
+      Horas Normales:
+      {{data.regularHour.listOfHour[0]}}
     </li>
     <li>
-      <span></span> {{data.nightHour.type}} :
-      <span></span> {{data.nightHour.listOfHour[0]}}
+      Horas Nocturnas:
+      {{data.nightHour.listOfHour[0]}}
     </li>
     <li>
-      <span></span> {{data.sundayHour.type}} :
-      <span></span> {{data.sundayHour.listOfHour[0]}}
+      Horas Dominicales:
+      {{data.sundayHour.listOfHour[0]}}
     </li>
     <li>
-      <span></span> {{data.extraRegularHour.type}} :
-      <span></span> {{data.extraRegularHour.listOfHour[0]}}
+      Horas Normales Extra:
+      {{data.extraRegularHour.listOfHour[0]}}
     </li>
     <li>
-      <span></span> {{data.extraNightHour.type}} :
-      <span></span> {{data.extraNightHour.listOfHour[0]}}
+      Horas Nocturnas Extra:
+      {{data.extraNightHour.listOfHour[0]}}
     </li>
     <li>
-      <span></span> {{data.extraSundayHour.type}} :
-      <span></span> {{data.extraSundayHour.listOfHour[0]}}
+      Horas Dominicales Extra:
+      {{data.extraSundayHour.listOfHour[0]}}
     </li>
 </div>
+<button class="button-dialog" mat-raised-button (click)="onNoClick()">Cerrar</button>

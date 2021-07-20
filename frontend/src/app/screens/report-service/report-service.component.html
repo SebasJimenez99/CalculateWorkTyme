@@ -1,5 +1,6 @@
 <mat-toolbar class="top-bar">
-  <span>My Application</span>
+  <a mat-button [routerLink]="['/report']" routerLinkActive="active">Crear Reporte</a>
+  <a mat-button [routerLink]="['/calculate']" routerLinkActive="active">Calcular Tiempo</a>
 </mat-toolbar>
 <mat-card class="card-report-calculate">
   <p class="title">Campos para reportar un servicio</p>
