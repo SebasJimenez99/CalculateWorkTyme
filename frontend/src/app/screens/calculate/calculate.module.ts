@@ -1,9 +1,9 @@
-import { DialogComponent } from './../../components/dialog/dialog.component';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CalculateServiceRoutingModule } from './calculate-service-routing.module';
-import { CalculateServiceComponent } from './calculate-service.component';
+import { CalculateServiceRoutingModule } from './calculate-routing.module';
+import { CalculateComponent } from './calculate.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +15,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
-    CalculateServiceComponent
+    CalculateComponent
   ],
   imports: [
     CommonModule,

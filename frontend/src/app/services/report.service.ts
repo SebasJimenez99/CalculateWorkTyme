@@ -13,13 +13,13 @@ export class ReportService {
 
   constructor(private http: HttpClient) { }
 
-  createReport(report: Report): Observable<any> {
+  createReport(report: Report): Observable<Report> {
     const myFormat= 'yyyy-MM-DD HH:mm:ss';
-    var finalDate = moment(report.finalDate).format(myFormat);
-    var initialDate = moment(report.initialDate).format(myFormat);
+    const finalDate = moment(report.finalDate).format(myFormat);
+    const initialDate = moment(report.initialDate).format(myFormat);
     report.finalDate = finalDate;
     report.initialDate = initialDate;
-    return this.http.post(this.apiUrl + 'reports', report);
+    return this.http.post<Report>(this.apiUrl + 'reports', report);
   }
 
 }

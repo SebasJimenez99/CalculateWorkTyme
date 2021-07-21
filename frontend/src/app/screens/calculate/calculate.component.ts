@@ -1,5 +1,5 @@
-import { TypeHour } from './../../interfaces/TypeHour.model';
-import { DialogComponent } from './../../components/dialog/dialog.component';
+import { TypeHour } from '../../interfaces/TypeHour.model';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 import { CalculateService } from '../../services/calculate.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -7,12 +7,12 @@ import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-calculate-service',
-  templateUrl: './calculate-service.component.html',
-  styleUrls: ['./calculate-service.component.scss'],
+  selector: 'app-calculate',
+  templateUrl: './calculate.component.html',
+  styleUrls: ['./calculate.component.scss'],
   providers: [CalculateService]
 })
-export class CalculateServiceComponent implements OnInit {
+export class CalculateComponent implements OnInit {
 
   calculateForm!: FormGroup;
 

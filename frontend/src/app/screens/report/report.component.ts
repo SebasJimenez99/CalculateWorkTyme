@@ -1,4 +1,4 @@
-import { ReportService } from './../../services/report.service';
+import { ReportService } from '../../services/report.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Report } from 'src/app/interfaces/Report.model';
@@ -6,12 +6,12 @@ import * as moment from 'moment/moment';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-report-service',
-  templateUrl: './report-service.component.html',
-  styleUrls: ['./report-service.component.scss'],
+  selector: 'app-report',
+  templateUrl: './report.component.html',
+  styleUrls: ['./report.component.scss'],
   providers: [ReportService]
 })
-export class ReportServiceComponent implements OnInit {
+export class ReportComponent implements OnInit {
 
   reportForm!: FormGroup;
   es: any;

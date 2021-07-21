@@ -1,3 +1,4 @@
+import { TypeHour } from './../interfaces/TypeHour.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -11,7 +12,7 @@ export class CalculateService {
 
   constructor(private http: HttpClient) { }
 
-  calculateTimeByTechnician(idTechnician: string, weekNumber: number): Observable<any> {
-    return this.http.get(this.apiUrl + 'calculate?idTechnical=' + idTechnician + '&weekNumber='+ weekNumber);
+  calculateTimeByTechnician(idTechnician: string, weekNumber: number): Observable<TypeHour> {
+    return this.http.get<TypeHour>(this.apiUrl + 'calculate?idTechnical=' + idTechnician + '&weekNumber='+ weekNumber);
   }
 }

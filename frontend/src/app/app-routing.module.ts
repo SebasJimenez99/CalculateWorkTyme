@@ -9,11 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'calculate',
-    loadChildren: () => import('./screens/calculate-service/calculate-service.module').then(m => m.CalculateServiceModule)
+    loadChildren: () => import('./screens/calculate/calculate.module').then(m => m.CalculateServiceModule)
   },
   {
     path: 'report',
-    loadChildren: () => import('./screens/report-service/report-service.module').then(m => m.ReportServiceModule)
+    loadChildren: () => import('./screens/report/report.module').then(m => m.ReportServiceModule)
   },
 ];
 
