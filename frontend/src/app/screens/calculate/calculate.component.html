@@ -1,0 +1,20 @@
+<mat-toolbar class="top-bar">
+  <a mat-button [routerLink]="['/report']" routerLinkActive="active">Crear Reporte</a>
+  <a mat-button [routerLink]="['/calculate']" routerLinkActive="active">Calcular Tiempo</a>
+</mat-toolbar>
+<mat-card class="card-report-calculate">
+  <p class="title">Consultar reportes de un técnico</p>
+  <form class="card-form" [formGroup]="calculateForm">
+    <div class="row-input">
+      <mat-form-field class="input-rep" appearance="fill">
+        <mat-label>Id técnico</mat-label>
+        <input matInput formControlName="idTechnical">
+      </mat-form-field>
+      <mat-form-field class="input-rep" appearance="fill">
+        <mat-label>Número de semana</mat-label>
+        <input matInput formControlName="weekNumber" type="number">
+      </mat-form-field>
+    </div>
+    <button class="button-any" (click)="getReportByTechnicianIdAndWeekNumber()" mat-raised-button [disabled]="!calculateForm.valid">Consultar</button>
+  </form>
+</mat-card>

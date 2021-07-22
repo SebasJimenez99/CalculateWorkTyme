@@ -1,0 +1,39 @@
+.calendar-rep {
+  color: gray;
+  text-align: left;
+  width: 49%;
+  margin-top: 4%;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.input-rep {
+  margin-top: 4%;
+  width: 49%;
+}
+
+.mat-raised-button {
+  margin-top: 3%;
+}
+
+::ng-deep .p-inputtext {
+  background-color: rgba(0,0,0,.04);
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
+  &:hover {
+    border-bottom: 2px solid;
+  }
+}
+
+.row-input .mat-form-field + .mat-form-field {
+  margin-left: 2%;
+}

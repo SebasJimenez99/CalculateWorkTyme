@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Horas de trabajo</h1>
+<div mat-dialog-content>
+    <li>
+      Horas Normales:
+      {{data.regularHour.listOfHour[0]}}
+    </li>
+    <li>
+      Horas Nocturnas:
+      {{data.nightHour.listOfHour[0]}}
+    </li>
+    <li>
+      Horas Dominicales:
+      {{data.sundayHour.listOfHour[0]}}
+    </li>
+    <li>
+      Horas Normales Extra:
+      {{data.extraRegularHour.listOfHour[0]}}
+    </li>
+    <li>
+      Horas Nocturnas Extra:
+      {{data.extraNightHour.listOfHour[0]}}
+    </li>
+    <li>
+      Horas Dominicales Extra:
+      {{data.extraSundayHour.listOfHour[0]}}
+    </li>
+</div>
+<button class="button-dialog" mat-raised-button (click)="onNoClick()">Cerrar</button>

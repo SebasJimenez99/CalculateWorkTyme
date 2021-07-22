@@ -1,0 +1,36 @@
+<mat-toolbar class="top-bar">
+  <a mat-button [routerLink]="['/report']" routerLinkActive="active">Crear Reporte</a>
+  <a mat-button [routerLink]="['/calculate']" routerLinkActive="active">Calcular Tiempo</a>
+  <a mat-button [routerLink]="['/report/list']" routerLinkActive="active">Lista de Reportes</a>
+</mat-toolbar>
+<mat-card class="card-report-calculate">
+  <p class="title">Campos para reportar un servicio</p>
+  <form class="card-form" [formGroup]="reportForm">
+
+    <div class="row-input">
+      <mat-form-field class="input-rep" appearance="fill">
+        <mat-label>Id técnico</mat-label>
+        <input matInput formControlName="idTechnician">
+      </mat-form-field>
+      <mat-form-field class="input-rep" appearance="fill">
+        <mat-label>Id Servicio</mat-label>
+        <input matInput formControlName="idService">
+      </mat-form-field>
+    </div>
+    <div class="p-fluid p-grid p-formgrid flex">
+      <div class="calendar-rep">
+        <span class="p-float-label">
+          <p-calendar [showTime]="true" inputId="time" formControlName="initialDate"></p-calendar>
+          <label for="time">Fecha y hora inicial</label>
+        </span>
+      </div>
+      <div class="calendar-rep">
+        <span class="p-float-label">
+          <p-calendar [showTime]="true" inputId="time" formControlName="finalDate"></p-calendar>
+          <label for="time">Fecha y hora final</label>
+        </span>
+      </div>
+    </div>
+    <button class="button-any" mat-raised-button (click)="createReport()" [disabled]="!reportForm.valid">Aceptar</button>
+  </form>
+</mat-card>
