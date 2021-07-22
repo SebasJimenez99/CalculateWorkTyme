@@ -1,0 +1,82 @@
+<mat-toolbar class="top-bar">
+  <a mat-button [routerLink]="['/report']" routerLinkActive="active">Crear Reporte</a>
+  <a mat-button [routerLink]="['/calculate']" routerLinkActive="active">Calcular Tiempo</a>
+  <a mat-button [routerLink]="['/report/list']" routerLinkActive="active">Lista de Reportes</a>
+</mat-toolbar>
+<mat-card class="card-list">
+  <mat-card-title>
+    <h1>Lista de Reportes</h1>
+  </mat-card-title>
+  <mat-card-content>
+    <div class="header">
+    </div>
+
+    <div class="data">
+      <p-table #dt [value]="listReport" [rows]="10">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Id</th>
+            <th>Id Técnico</th>
+            <th>Id Servicio</th>
+            <th>Fecha inicio</th>
+            <th>Fecha fin</th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-report>
+          <tr>
+            <td>{{report.id}}</td>
+            <td>{{report.idTechnician}}</td>
+            <td>{{report.idService}}</td>
+            <td>{{report.initialDate}}</td>
+            <td>{{report.finalDate}}</td>
+            <td>
+              <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded p-button-success"
+                (click)="editReport(report)"></button>
+              <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded p-button-warning"
+                (click)="deleteReport(report)"></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </mat-card-content>
+</mat-card>
+<p-dialog [(visible)]="reportDialog" height="60%" [style]="{width: '100%'}" header="Campos para actualizar un servicio" [modal]="true"
+  [baseZIndex]="10000">
+  <ng-template pTemplate="content">
+    <mat-card class="card-report-list">
+        <div class="row-input">
+          <mat-form-field class="input-rep" appearance="fill">
+            <mat-label>Id técnico</mat-label>
+            <input matInput [(ngModel)]="report.idTechnician">
+          </mat-form-field>
+          <mat-form-field class="input-rep" appearance="fill">
+            <mat-label>Id Servicio</mat-label>
+            <input matInput [(ngModel)]="report.idService">
+          </mat-form-field>
+        </div>
+        <div class="p-fluid p-grid p-formgrid flex">
+          <div class="calendar-rep">
+            <span class="p-float-label">
+              <p-calendar [showTime]="true" inputId="time" [(ngModel)]="initialDate"></p-calendar>
+              <label for="time">Fecha y hora inicial</label>
+            </span>
+          </div>
+          <div class="calendar-rep">
+            <span class="p-float-label">
+              <p-calendar [showTime]="true" inputId="time" [(ngModel)]="finalDate"></p-calendar>
+              <label for="time">Fecha y hora final</label>
+            </span>
+          </div>
+        </div>
+    </mat-card>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+    <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="saveReport()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

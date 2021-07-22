@@ -2,7 +2,7 @@ import { DialogComponent } from '../../components/dialog/dialog.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { CalculateServiceRoutingModule } from './calculate-routing.module';
+import { CalculateRoutingModule } from './calculate-routing.module';
 import { CalculateComponent } from './calculate.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,7 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   ],
   imports: [
     CommonModule,
-    CalculateServiceRoutingModule,
+    CalculateRoutingModule,
     MatToolbarModule,
     MatCardModule,
     MatInputModule,
@@ -34,4 +34,4 @@ import { MatDialogModule } from '@angular/material/dialog';
     DialogComponent
   ]
 })
-export class CalculateServiceModule { }
+export class CalculateModule { }

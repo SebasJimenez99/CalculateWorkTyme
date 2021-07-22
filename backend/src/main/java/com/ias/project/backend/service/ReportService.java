@@ -6,6 +6,7 @@
 package com.ias.project.backend.service;
 
 import com.ias.project.backend.model.Report;
+import java.util.List;
 
 /**
  *
@@ -14,4 +15,7 @@ import com.ias.project.backend.model.Report;
 public interface ReportService {
 
     Report createReport(Report report);
+    Report updateReport(Integer id, Report report);
+    List<Report> findAllReports();
+    Boolean deleteReport(Integer reportId);
 }

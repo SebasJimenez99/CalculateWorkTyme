@@ -9,7 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CalendarModule } from 'primeng/calendar';
-import { ReportServiceRoutingModule } from '../screens/report/report-routing.module';
+import { ReportRoutingModule } from '../screens/report/report-routing.module';
 
 describe('CalculateService', () => {
   let service: CalculateService;
@@ -22,7 +22,7 @@ describe('CalculateService', () => {
       declarations: [ CalculateComponent ],
       imports: [
         CommonModule,
-        ReportServiceRoutingModule,
+        ReportRoutingModule,
         MatToolbarModule,
         MatCardModule,
         MatInputModule,

@@ -1,5 +1,5 @@
 import { Report } from './../interfaces/Report.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as moment from 'moment/moment';
@@ -22,4 +22,17 @@ export class ReportService {
     return this.http.post<Report>(this.apiUrl + 'reports', report);
   }
 
+  updateReport(report: Report): Observable<Report> {
+    const idReport = report.id;
+    return this.http.put<Report>(this.apiUrl + 'reports/' + idReport, report);
+  }
+
+  getAllReports(): Observable<Report[]> {
+    return this.http.get<Report[]>(this.apiUrl + 'reports');
+  }
+
+  deleteReport(report: Report): Observable<any> {
+    const idReport = report.id;
+    return this.http.delete(this.apiUrl + 'reports/' + idReport);
+  }
 }

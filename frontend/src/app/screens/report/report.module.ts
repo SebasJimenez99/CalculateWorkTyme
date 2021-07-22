@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ReportServiceRoutingModule } from './report-routing.module';
+import { ReportRoutingModule } from './report-routing.module';
 import { ReportComponent } from './report.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
@@ -17,7 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     CommonModule,
-    ReportServiceRoutingModule,
+    ReportRoutingModule,
     MatToolbarModule,
     MatCardModule,
     MatInputModule,
@@ -28,4 +28,4 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
   ]
 })
-export class ReportServiceModule { }
+export class ReportModule { }
