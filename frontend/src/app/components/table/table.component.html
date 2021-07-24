@@ -59,13 +59,13 @@
         <div class="p-fluid p-grid p-formgrid flex">
           <div class="calendar-rep">
             <span class="p-float-label">
-              <p-calendar [showTime]="true" inputId="time" [(ngModel)]="initialDate"></p-calendar>
+              <p-calendar [showTime]="true" [touchUI]="true" inputId="timeInitial" [(ngModel)]="initialDate"></p-calendar>
               <label for="time">Fecha y hora inicial</label>
             </span>
           </div>
           <div class="calendar-rep">
             <span class="p-float-label">
-              <p-calendar [showTime]="true" inputId="time" [(ngModel)]="finalDate"></p-calendar>
+              <p-calendar [showTime]="true" [touchUI]="true" inputId="timeFinal" [(ngModel)]="finalDate"></p-calendar>
               <label for="time">Fecha y hora final</label>
             </span>
           </div>
