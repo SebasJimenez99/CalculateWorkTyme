@@ -5,14 +5,7 @@
  */
 package com.ias.project.backend.service.implement;
 
-import com.ias.project.backend.dto.DateAndType;
-import com.ias.project.backend.dto.ExtraNightHour;
-import com.ias.project.backend.dto.ExtraRegularHour;
-import com.ias.project.backend.dto.ExtraSundayHour;
-import com.ias.project.backend.dto.NightHour;
-import com.ias.project.backend.dto.RegularHour;
-import com.ias.project.backend.dto.SundayHour;
-import com.ias.project.backend.dto.TypeHour;
+import com.ias.project.backend.dto.*;
 import com.ias.project.backend.model.Report;
 import com.ias.project.backend.repository.ReportRepository;
 import com.ias.project.backend.service.CalculateTimeService;
@@ -92,12 +85,12 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
 
     private TypeHour getAllTypeHour(List<TypeHour> listTotalHoursOfOperation) {
         TypeHour typeHour = new TypeHour();
-        RegularHour regularHour = new RegularHour();
-        NightHour nightHour = new NightHour();
-        SundayHour sundayHour = new SundayHour();
-        ExtraRegularHour extraRegularHour = new ExtraRegularHour();
-        ExtraNightHour extraNightHour = new ExtraNightHour();
-        ExtraSundayHour extraSundayHour = new ExtraSundayHour();
+        Hour regularHour = new Hour();
+        Hour nightHour = new Hour();
+        Hour sundayHour = new Hour();
+        Hour extraRegularHour = new Hour();
+        Hour extraNightHour = new Hour();
+        Hour extraSundayHour = new Hour();
         List<Float> listHoursOfRegularHour = new ArrayList<>();
         List<Float> listHoursOfNightHour = new ArrayList<>();
         List<Float> listHoursOfSundayHour = new ArrayList<>();
@@ -194,12 +187,12 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
     private TypeHour hourByType(String type, Float hour) {
         List<Float> listOfHour = new ArrayList<>();
         TypeHour typeHour = new TypeHour();
-        RegularHour regularHour = new RegularHour();
-        NightHour nightHour = new NightHour();
-        SundayHour sundayHour = new SundayHour();
-        ExtraRegularHour extraRegularHour = new ExtraRegularHour();
-        ExtraNightHour extraNightHour = new ExtraNightHour();
-        ExtraSundayHour extraSundayHour = new ExtraSundayHour();
+        Hour regularHour = new Hour();
+        Hour nightHour = new Hour();
+        Hour sundayHour = new Hour();
+        Hour extraRegularHour = new Hour();
+        Hour extraNightHour = new Hour();
+        Hour extraSundayHour = new Hour();
         switch (type) {
             case "Horas Normales":
                 listOfHour.add(hour);

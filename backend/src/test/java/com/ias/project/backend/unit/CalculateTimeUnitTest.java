@@ -5,12 +5,7 @@
  */
 package com.ias.project.backend.unit;
 
-import com.ias.project.backend.dto.ExtraNightHour;
-import com.ias.project.backend.dto.ExtraRegularHour;
-import com.ias.project.backend.dto.ExtraSundayHour;
-import com.ias.project.backend.dto.NightHour;
-import com.ias.project.backend.dto.RegularHour;
-import com.ias.project.backend.dto.SundayHour;
+import com.ias.project.backend.dto.Hour;
 import com.ias.project.backend.dto.TypeHour;
 import com.ias.project.backend.model.Report;
 import com.ias.project.backend.repository.ReportRepository;
@@ -56,22 +51,22 @@ public class CalculateTimeUnitTest {
         listOfHourExtNoc.add(0.0f);
         List<Float> listOfHourExtDom = new ArrayList<>();
         listOfHourExtDom.add(0.0f);
-        RegularHour regularHour = new RegularHour();
+        Hour regularHour = new Hour();
         regularHour.setListOfHour(listOfHourReg);
         regularHour.setType("Horas Normales");
-        NightHour nightHour = new NightHour();
+        Hour nightHour = new Hour();
         nightHour.setListOfHour(listOfHourNoc);
         nightHour.setType("Horas Nocturnas");
-        SundayHour sundayHour = new SundayHour();
+        Hour sundayHour = new Hour();
         sundayHour.setListOfHour(listOfHourDom);
         sundayHour.setType("Horas Dominicales");
-        ExtraRegularHour extraRegularHour = new ExtraRegularHour();
+        Hour extraRegularHour = new Hour();
         extraRegularHour.setListOfHour(listOfHourExtReg);
         extraRegularHour.setType("Horas Normales Extra");
-        ExtraNightHour extraNightHour = new ExtraNightHour();
+        Hour extraNightHour = new Hour();
         extraNightHour.setListOfHour(listOfHourExtNoc);
         extraNightHour.setType(null);
-        ExtraSundayHour extraSundayHour = new ExtraSundayHour();
+        Hour extraSundayHour = new Hour();
         extraSundayHour.setListOfHour(listOfHourExtDom);
         extraSundayHour.setType(null);
         TypeHour newTypeHour = new TypeHour(regularHour, nightHour,
