@@ -4,7 +4,7 @@
 </mat-toolbar>
 <mat-card class="card-report-calculate">
   <p class="title">Consultar reportes de un técnico</p>
-  <form class="card-form" [formGroup]="calculateForm">
+  <form class="card-form" [formGroup]="calculateForm" (ngSubmit)="getReportByTechnicianIdAndWeekNumber()">
     <div class="row-input">
       <mat-form-field class="input-rep" appearance="fill">
         <mat-label>Id técnico</mat-label>
@@ -15,6 +15,7 @@
         <input matInput formControlName="weekNumber" type="number">
       </mat-form-field>
     </div>
-    <button class="button-any" (click)="getReportByTechnicianIdAndWeekNumber()" mat-raised-button [disabled]="!calculateForm.valid">Consultar</button>
+    <button id="btn-submit" class="button-any" type="submit" mat-raised-button
+    [disabled]="!calculateForm.valid">Consultar</button>
   </form>
 </mat-card>
