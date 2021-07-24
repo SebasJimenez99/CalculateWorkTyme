@@ -12,7 +12,9 @@ export class CalculateService {
 
   constructor(private http: HttpClient) { }
 
-  calculateTimeByTechnician(idTechnician: string, weekNumber: number): Observable<TypeHour> {
-    return this.http.get<TypeHour>(this.apiUrl + 'calculate?idTechnical=' + idTechnician + '&weekNumber='+ weekNumber);
+  calculateTimeByTechnician(technician: any): Observable<TypeHour> {
+    return this.http.get<TypeHour>(
+      `${this.apiUrl}calculate?idTechnical=${technician.idTechnician}&weekNumber=${technician.weekNumber}`
+    );
   }
 }
