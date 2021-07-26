@@ -21,3 +21,11 @@ export const ReportFormMock = {
   initialDate: new Date(2021, 9, 23),
   finalDate: new Date(2021, 9, 23)
 }
+
+export const ReportNotDeleteMock = {
+  id: 99,
+  idService: 'gfd',
+  idTechnician: 'cbx',
+  initialDate: "20/07/1",
+  finalDate: "20/07/3"
+}

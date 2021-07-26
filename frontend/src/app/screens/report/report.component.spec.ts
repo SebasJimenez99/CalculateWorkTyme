@@ -9,7 +9,6 @@ import { of } from 'rxjs';
 
 import { ReportComponent } from './report.component';
 import { ReportService } from './../../services/report.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 describe('ReportServiceComponent', () => {
   let service: ReportService;
