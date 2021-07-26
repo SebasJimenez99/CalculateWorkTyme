@@ -27,8 +27,8 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     MatButtonModule,
     ButtonModule,
     MatCardModule,
