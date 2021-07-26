@@ -27,7 +27,7 @@ export class CalculateComponent implements OnInit {
   initializeForms(): void {
     this.calculateForm = this.fb.group({
       idTechnical: new FormControl(null, [Validators.required]),
-      weekNumber: new FormControl(null, [Validators.required]),
+      weekNumber: new FormControl(null, [Validators.required])
     });
   }
 

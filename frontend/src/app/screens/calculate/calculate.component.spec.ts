@@ -8,7 +8,7 @@ import { CalculateEmptyMock, CalculateMock, TypeHourMock } from './../../helpers
 import { CalculateComponent } from './calculate.component';
 import { CalculateService } from './../../services/calculate.service';
 
-fdescribe('CalculateComponent', () => {
+describe('CalculateComponent', () => {
   let service: CalculateService;
   let component: CalculateComponent;
   let fixture: ComponentFixture<CalculateComponent>;

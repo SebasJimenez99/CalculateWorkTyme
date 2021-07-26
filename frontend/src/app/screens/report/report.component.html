@@ -5,7 +5,7 @@
 </mat-toolbar>
 <mat-card class="card-report-calculate">
   <p class="title">Campos para reportar un servicio</p>
-  <form class="card-form" [formGroup]="reportForm">
+  <form class="card-form" [formGroup]="reportForm" (ngSubmit)="createReport()">
 
     <div class="row-input">
       <mat-form-field class="input-rep" appearance="fill">
@@ -31,6 +31,7 @@
         </span>
       </div>
     </div>
-    <button class="button-any" mat-raised-button (click)="createReport()" [disabled]="!reportForm.valid">Aceptar</button>
+    <button id="btn-submit" class="button-any" mat-raised-button [disabled]="!reportForm.valid"
+    type="submit">Aceptar</button>
   </form>
 </mat-card>
