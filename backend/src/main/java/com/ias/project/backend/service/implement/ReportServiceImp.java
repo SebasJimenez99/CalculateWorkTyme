@@ -59,7 +59,7 @@ public class ReportServiceImp implements ReportService {
         Optional<Report> reportDelete = reportRepository
                 .findById(reportId);
         if(!reportDelete.isPresent()){
-            return null;
+            return false;
         }
         reportRepository.deleteById(reportDelete.get().getId());
         return true;

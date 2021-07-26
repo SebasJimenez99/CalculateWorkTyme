@@ -1,8 +1,3 @@
-<mat-toolbar class="top-bar">
-  <a mat-button [routerLink]="['/report']" routerLinkActive="active">Crear Reporte</a>
-  <a mat-button [routerLink]="['/calculate']" routerLinkActive="active">Calcular Tiempo</a>
-  <a mat-button [routerLink]="['/report/list']" routerLinkActive="active">Lista de Reportes</a>
-</mat-toolbar>
 <mat-card class="card-list">
   <mat-card-title>
     <h1>Lista de Reportes</h1>
@@ -31,9 +26,9 @@
             <td>{{report.initialDate}}</td>
             <td>{{report.finalDate}}</td>
             <td>
-              <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded p-button-success"
+              <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-success"
                 (click)="editReport(report)"></button>
-              <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded p-button-warning"
+              <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-warning"
                 (click)="deleteReport(report)"></button>
             </td>
           </tr>
