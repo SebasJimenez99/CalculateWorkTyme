@@ -31,8 +31,8 @@ export class ReportService {
     return this.http.get<Report[]>(this.apiUrl + 'reports');
   }
 
-  deleteReport(report: Report): Observable<any> {
+  deleteReport(report: Report): Observable<Boolean> {
     const idReport = report.id;
-    return this.http.delete(this.apiUrl + 'reports/' + idReport);
+    return this.http.delete<Boolean>(this.apiUrl + 'reports/' + idReport);
   }
 }

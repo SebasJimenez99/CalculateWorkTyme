@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { Report } from 'src/app/interfaces/Report.model';
 import { ReportService } from 'src/app/services/report.service';
 import Swal from 'sweetalert2';
@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  providers: [MessageService, ConfirmationService, ReportService]
+  providers: [ConfirmationService, ReportService]
 })
 export class TableComponent implements OnInit {
 
@@ -21,7 +21,7 @@ export class TableComponent implements OnInit {
   initialDate!: Date;
   finalDate!: Date;
 
-  constructor(private messageService: MessageService, private confirmationService: ConfirmationService,
+  constructor(private confirmationService: ConfirmationService,
     private reportService: ReportService) { }
 
   ngOnInit(): void {
@@ -43,10 +43,17 @@ export class TableComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.reportService.deleteReport(report).subscribe(success => {
-          Swal.fire({
-            icon: 'success',
-            title: 'El reporte ha sido eliminado',
-          });
+          if (success == true) {
+            Swal.fire({
+              icon: 'success',
+              title: 'El reporte ha sido eliminado',
+            });
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'El reporte ha no podido ser eliminado',
+            });
+          }
         });
         this.listReport = this.listReport.filter(val => val.id !== report.id);
         this.report = { id: 0, idTechnician: '', idService: '', initialDate: '', finalDate: '' };
@@ -82,7 +89,6 @@ export class TableComponent implements OnInit {
         this.reportDialog = false;
       } else {
         this.reportService.updateReport(this.report).subscribe(success => {
-          console.log(success);
           Swal.fire({
             icon: 'success',
             title: 'El reporte ha sido actualizado',

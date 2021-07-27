@@ -2,7 +2,6 @@ import { ReportService } from '../../services/report.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { Report } from 'src/app/interfaces/Report.model';
-import * as moment from 'moment/moment';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,7 +18,7 @@ export class ReportComponent implements OnInit {
   minDate!: Date;
   maxDate!: Date;
 
-  constructor(private fb: FormBuilder, private reportService: ReportService) {}
+  constructor(private fb: FormBuilder, private reportService: ReportService) { }
 
   ngOnInit(): void {
     this.initializeForms();
@@ -31,15 +30,16 @@ export class ReportComponent implements OnInit {
       idTechnician: new FormControl(null, [Validators.required]),
       idService: new FormControl(null, [Validators.required]),
       initialDate: new FormControl(null, [Validators.required]),
-      finalDate: new FormControl(null, [Validators.required]),
+      finalDate: new FormControl(null, [Validators.required])
     });
   }
 
   createReport(): void {
     this.newReport = this.reportForm.value;
+    console.log(this.reportForm.value);
     let initialDate = new Date(this.reportForm.value.initialDate).getTime();
     let finalDate = new Date(this.reportForm.value.finalDate).getTime();
-    if(initialDate > finalDate){
+    if (initialDate > finalDate) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',

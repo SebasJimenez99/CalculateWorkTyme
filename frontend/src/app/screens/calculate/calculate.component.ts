@@ -1,10 +1,11 @@
-import { TypeHour } from '../../interfaces/TypeHour.model';
-import { DialogComponent } from '../../components/dialog/dialog.component';
-import { CalculateService } from '../../services/calculate.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+
+import { TypeHour } from '../../interfaces/TypeHour.model';
+import { DialogComponent } from '../../components/dialog/dialog.component';
+import { CalculateService } from '../../services/calculate.service';
 
 @Component({
   selector: 'app-calculate',
@@ -26,7 +27,7 @@ export class CalculateComponent implements OnInit {
   initializeForms(): void {
     this.calculateForm = this.fb.group({
       idTechnical: new FormControl(null, [Validators.required]),
-      weekNumber: new FormControl(null, [Validators.required]),
+      weekNumber: new FormControl(null, [Validators.required])
     });
   }
 
@@ -37,8 +38,7 @@ export class CalculateComponent implements OnInit {
   }
 
   getReportByTechnicianIdAndWeekNumber(): void {
-    this.calculateService.calculateTimeByTechnician(this.calculateForm.value.idTechnical,
-      this.calculateForm.value.weekNumber).subscribe(success => {
+    this.calculateService.calculateTimeByTechnician(this.calculateForm.value).subscribe(success => {
         this.openDialog(success);
         console.log(success);
       }, error => {
