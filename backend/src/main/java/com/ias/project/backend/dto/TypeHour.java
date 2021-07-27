@@ -24,19 +24,19 @@ import lombok.Setter;
 public class TypeHour {
 
     @ApiModelProperty(notes = "Schedule regular associated with the type hour")
-    private RegularHour regularHour;
+    private Hour regularHour;
     @ApiModelProperty(notes = "Schedule night associated with the type hour")
-    private NightHour nightHour;
+    private Hour nightHour;
     @ApiModelProperty(notes = "Schedule sunday associated with the type hour")
-    private SundayHour sundayHour;
+    private Hour sundayHour;
     @ApiModelProperty(notes = "Schedule extra regular associated with the type "
             + "hour")
-    private ExtraRegularHour extraRegularHour;
+    private Hour extraRegularHour;
     @ApiModelProperty(notes = "Schedule extra night associated with the type "
             + "hour")
-    private ExtraNightHour extraNightHour;
+    private Hour extraNightHour;
     @ApiModelProperty(notes = "Schedule extra sunday associated with the type "
             + "hour")
-    private ExtraSundayHour extraSundayHour;
+    private Hour extraSundayHour;
 
 }
