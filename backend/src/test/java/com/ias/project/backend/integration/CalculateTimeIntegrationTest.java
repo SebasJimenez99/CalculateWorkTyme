@@ -52,16 +52,16 @@ public class CalculateTimeIntegrationTest {
     @Test
     public void calculateHoursGiveOk() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        String initialDateFirst = "2021-07-13 14:00:00";
-        String finalDateFirst = "2021-07-14 15:30:00)";
-        String initialDateSecond = "2021-07-14 08:10:00";
-        String finalDateSecond = "2021-07-14 12:20:00";
-        String initialDateThird = "2021-07-18 08:10:00";
-        String finalDateThird = "2021-07-18 21:20:00";
-        String initialDateFourth = "2021-07-15 08:10:00";
-        String finalDateFourth = "2021-07-15 14:20:00";
-        String initialDateFifth = "2021-07-16 08:10:00";
-        String finalDateFifth = "2021-07-16 14:20:00";
+        String initialDateFirst = "2021-07-29 14:00:00";
+        String finalDateFirst = "2021-07-29 15:30:00";
+        String initialDateSecond = "2021-07-27 08:10:00";
+        String finalDateSecond = "2021-07-27 12:20:00";
+        String initialDateThird = "2021-07-28 08:10:00";
+        String finalDateThird = "2021-07-28 21:20:00";
+        String initialDateFourth = "2021-07-01 08:10:00";
+        String finalDateFourth = "2021-08-01 14:20:00";
+        String initialDateFifth = "2021-07-26 08:10:00";
+        String finalDateFifth = "2021-07-26 14:20:00";
         this.mockMvc.perform(MockMvcRequestBuilders.post("/reports")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(new Report(1,
@@ -93,7 +93,7 @@ public class CalculateTimeIntegrationTest {
                         finalDateFifth))))
                 .andReturn();
         this.mockMvc.perform(MockMvcRequestBuilders
-                .get("/calculate?idTechnical=adf31&weekNumber=28"))
+                .get("/calculate?idTechnical=adf31&weekNumber=31"))
                 .andDo(print()).andExpect(status().isOk())
                 .andReturn();
     }

@@ -41,6 +41,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
         List<Report> listReports = reportRepository.findAll();
         List<Report> reportsByTechnician = getTechnicianById(listReports,
                 idTechnician);
+        System.out.println("Lista report " + reportsByTechnician.size());
         List<Report> reportsByTechnicianAndWeekNumber
                 = getTechnicianByWeekNumber(reportsByTechnician, weekNumber);
         List<TypeHour> listTotalHoursOfOperation
@@ -357,10 +358,10 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
         DateAndType dateAndTypeTwo = new DateAndType();
         DateAndType dateAndTypeThree = new DateAndType();
         List<DateAndType> listDateAndType = new ArrayList<>();
-        if (dayWeekInitial < dayWeekFinal && dayWeekInitial != 1
+        if (dayWeekInitial <= dayWeekFinal && dayWeekInitial != 1
                 && totalHoursOfOperation <= 48) {
-            Integer diferencia = dayWeekFinal - dayWeekInitial;
-            finalHour += 24 * diferencia;
+            Integer difference = dayWeekFinal - dayWeekInitial;
+            finalHour += 24 * difference;
             if (initialHour > 20 && dayWeekFinal != 1
                     && finalHour > 20 && finalHour < 31) {
                 dateAndType.setInitialDate(initialDate);
@@ -448,7 +449,7 @@ public class CalculateTimeServiceImp implements CalculateTimeService {
         DateAndType dateAndTypeTwo = new DateAndType();
         DateAndType dateAndTypeThree = new DateAndType();
         List<DateAndType> listDateAndType = new ArrayList<>();
-        if (dayWeekInitial < dayWeekFinal && dayWeekInitial != 1
+        if (dayWeekInitial <= dayWeekFinal && dayWeekInitial != 1
                 && totalHoursOfOperation > 48f) {
             Integer diferencia = dayWeekFinal - dayWeekInitial;
             finalHour += 24 * diferencia;
