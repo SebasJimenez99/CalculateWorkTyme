@@ -89,7 +89,6 @@ export class TableComponent implements OnInit {
         this.reportDialog = false;
       } else {
         this.reportService.updateReport(this.report).subscribe(success => {
-          console.log(success);
           Swal.fire({
             icon: 'success',
             title: 'El reporte ha sido actualizado',

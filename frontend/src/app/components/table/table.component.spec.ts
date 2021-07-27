@@ -1,13 +1,15 @@
+import { ReportLongerDateMock } from './../../helpers/mocks/report.mock';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfirmationService } from 'primeng/api';
 import { of } from 'rxjs';
 import { ReportMock } from 'src/app/helpers/mocks/report.mock';
 import { ReportService } from 'src/app/services/report.service';
 
 import { TableComponent } from './table.component';
 
-fdescribe('TableComponent', () => {
+describe('TableComponent', () => {
   let service: ReportService;
   let component: TableComponent;
   let fixture: ComponentFixture<TableComponent>;
@@ -18,7 +20,7 @@ fdescribe('TableComponent', () => {
       imports: [
         ReactiveFormsModule,
         HttpClientTestingModule
-      ]
+      ], providers: [ConfirmationService]
     })
     .compileComponents();
   });
@@ -35,11 +37,14 @@ fdescribe('TableComponent', () => {
   });
 
   it('Should do the delete of a report', () => {
-    spyOn(service, 'deleteReport').and.returnValue(of(true));
+    // const confirmationService = TestBed.get(ConfirmationService);
     component.report = ReportMock;
     component.deleteReport(ReportMock);
     fixture.detectChanges();
-
+    // spyOn<any>(confirmationService, 'accept').and.callFake((params: any) => {
+    //   params.reject();
+    //   spyOn(service, 'deleteReport').and.returnValue(of(true));
+    // });
     service.deleteReport(ReportMock).subscribe((res) => {
       expect(res).toBeTruthy();
     });
@@ -71,4 +76,5 @@ fdescribe('TableComponent', () => {
       expect(res).toEqual(ReportMock);
     });
   });
+
 });
